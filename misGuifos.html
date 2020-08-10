@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./styles/index.css" />
+    <link rel="icon" href="./assets/icono.ico" />
+    <title>Guifos.com</title>
+  </head>
+  <body id="theme" class="day">
+    <div class="mainContainer">
+      <header>
+        <div class="containerInit">
+          <h4 id="CounterVisitor">
+            ¡Bienvenidos/as a Guifos.com! ——————Donde los gifs están.//////
+            <script>
+              localStorage.getItem("numerovisitas", +localStorage.veces + "");
+              document.write("Número de visitas: " + localStorage.veces + "");
+            </script>
+          </h4>
+        </div>
+      </header>
+      <div class="subcontainer">
+        <nav class="container1">
+          <a href="index.html"
+            ><img class="logo" alt="logo" src="./assets/gifOF_logo.png" />
+            <img class="logo1" src="./assets/gifOF_logo_dark.png" alt="logo"
+          /></a>
+
+          <div class="botones">
+            <a href="create.html"><div class="btn-nav1">Crear Guifos</div></a>
+            <div class="dropdown" id="dropdown">
+              <button class="btn-nav2">Elegir tema</button
+              ><button class="elegirTemaDropdown">
+                <img
+                  class="flecha"
+                  src="./assets/dropdown.svg"
+                  alt="dropdown arrow"
+                />
+              </button>
+              <div class="dropdownContent">
+                <div class="themeButtonDay" id="day" onclick="day()">
+                  <h2>Sailor Day</h2>
+                </div>
+                <div class="themeButtonNight" id="night" onclick="night()">
+                  <h2>Sailor Night</h2>
+                </div>
+              </div>
+            </div>
+            <a class="misGuifos" href="misGuifos.html"><u>M</u>is Guifos</a>
+          </div>
+        </nav>
+        <section id="myGifo">
+          <div class="my-gifos">
+            <div class="title-section" id="misGuifosInput1">Mis Guifos:</div>
+            <div id="misGifosGifsContainer" class="misGifosGifsContainer"></div>
+          </div>
+        </section>
+        
+      </div>
+    </div>
+
+   
+    <script src="./js/changetheme.js"></script>
+    <script src="./js/crearGuifos.js"></script>
+    <script src="./js/funcionesCamara.js"></script>
+    <script src="./js/misGifos.js"></script>
+    <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.8/RecordRTC.js"></script>
+    
+  </body>
+</html>

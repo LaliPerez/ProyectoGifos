@@ -1,0 +1,421 @@
+.night {
+  .mainContainer {
+    background-color: #110038;
+    overflow: hidden;
+    header {
+      background-image: linear-gradient(270deg, #ee3efe 0%, #2e32fb 100%);
+      box-shadow: 0 1px 0 0 #110038;
+      color: #ffffff;
+    }
+    .container1 {
+      .logo1 {
+        display: block;
+        height: 64px;
+        width: 102.6px;
+        margin-top: 35px;
+        cursor: pointer;
+      }
+      .logo {
+        display: none;
+      }
+      .btn-nav1 {
+        background-color: #ee3efe;
+        border: 1px solid #110038;
+        box-shadow: inset -1px -1px 0 0 #a72cb3, inset 1px 1px 0 0 #ffffff;
+        color: #ffffff;
+      }
+      .btn-nav1:hover {
+        background-color: #ce36db;
+      }
+      .btn-nav2 {
+        background-color: #ee3efe;
+        border: 1px solid #110038;
+        box-shadow: inset -1px -1px 0 0 #a72cb3, inset 1px 1px 0 0 #ffffff;
+        color: #ffffff;
+      }
+      .btn-nav2:hover {
+        background-color: #ce36db;
+      }
+      .elegirTemaDropdown {
+        background: #ee3efe;
+        border: 1px solid #110038;
+        box-shadow: inset -1px -1px 0 0 #a72cb3, inset 1px 1px 0 0 #ffffff;
+        .flecha {
+          filter: invert(100%);
+        }
+      }
+      .elegirTemaDropdown:hover {
+        background: #ce36db;
+        border: 1px solid #110038;
+        box-shadow: inset -1px -1px 0 0 #a72cb3, inset 1px 1px 0 0 #ffffff;
+        outline: 1px dotted #110038;
+      }
+      .dropdownContent {
+        background: #b4b4b4;
+        box-shadow: inset -2px -2px 0 0 #8f8f8f, inset 2px 2px 0 0 #ffffff;
+        h2 {
+          color: #110038;
+          background-color: #cccccc;
+          border: 1px solid #808080;
+          box-shadow: inset -1px -1px 0 0 #b4b4b4, inset 1px 1px 0 0 #ffffff;
+        }
+        .dropdownContent:hover {
+          box-shadow: inset -1px -1px 0 0 #e6dce4, inset 1px 1px 0 0 #ffffff;
+        }
+        h2:hover {
+          color: #33358f6b 20%;
+          background: #2e32fb;
+          border: 1px solid rgba(51, 53, 143, 0.2);
+        }
+      }
+
+      .misGuifos {
+        color: #ffffff;
+
+        .misGuifos:active {
+          color: #ffffff;
+        }
+      }
+    }
+
+    .container2 {
+      .panel {
+        background: #B4B4B4;
+        box-shadow: inset -2px -2px 0 0 #8F8F8F, inset 2px 2px 0 0 #FFFFFF;
+        .panel-heading {
+          background-image: linear-gradient(270deg, #ee3efe 0%, #2e32fb 100%);
+          box-shadow: inset -2px -2px 0 0 #8f8f8f, inset 2px 2px 0 0 #ffffff;
+        }
+        .panelBody {
+          background: #b4b4b4;
+          box-shadow: inset -2px -2px 0 0 #8F8F8F, inset 2px 2px 0 0 #FFFFFF;
+          .searchInput {
+            background: #ffffff;
+            border: 1px solid #979797;
+            box-shadow: inset -2px -2px 0 0 #e6e6e6, inset 2px 2px 0 0 #000000;
+          }
+          .searchBtn {
+            letter-spacing: 0;
+            line-height: 18px;
+            background: #b4b4b4;
+            border: 1px solid #808080;
+            box-shadow: inset -1px -1px 0 0 #b4b4b4, inset 1px 1px 0 0 #ffffff;
+            color: #808080;
+          }
+          .lupa {
+            filter: brightness(30%);
+            filter: invert(50%);
+          }
+          .searchBtn:hover {
+            background: #ee3efe;
+            border: 1px solid #110038;
+            box-shadow: inset -1px -1px 0 0 #a72cb3, inset 1px 1px 0 0 #ffffff;
+            color:#FFFFFF;           
+            .lupa {
+              filter: brightness(30%);
+              filter: invert(100%);
+            }
+          }
+          .searchBtn:active :focus {
+            outline: 1px dotted #110038;
+            outline-offset: -5px;
+            background: #ce36db;
+            border: 1px solid #110038;
+            box-shadow: inset -1px -1px 0 0 #a72cb3, inset 1px 1px 0 0 #ffffff;
+            color:#FFFFFF;           
+            .lupa {
+              filter: brightness(30%);
+              filter: invert(100%);
+            }
+          }
+          .searchBtn:focus {
+            outline: 1px dotted #110038;
+            outline-offset: -5px;
+            background-color: #ce36db;
+            border: 1px solid #110038;
+            box-shadow: inset -1px -1px 0 0 #a72cb3, inset 1px 1px 0 0 #ffffff;
+            color: #ffffff;
+            .lupa {
+              filter: brightness(30%);
+              filter: invert(100%);
+            }
+          }
+        }
+      }
+      .dropdownSearchContent {
+        background: #b4b4b4 !important;
+        box-shadow: inset -2px -2px 0 0 #8f8f8f, inset 2px 2px 0 0 #ffffff !important;
+        #searchResult1 {
+          background: #cccccc;
+          border: 1px solid #808080;
+          box-shadow: inset -1px -1px 0 0 #b4b4b4, inset 1px 1px 0 0 #ffffff;
+        }
+        #searchResult1:hover {
+          border: 1px dotted #110038;
+        }
+        #searchResult2 {
+          background: #cccccc;
+          border: 1px solid #808080;
+          box-shadow: inset -1px -1px 0 0 #b4b4b4, inset 1px 1px 0 0 #ffffff;
+        }
+        #searchResult2:hover {
+          border: 1px dotted #110038;
+        }
+        #searchResult3 {
+          background: #cccccc;
+          border: 1px solid #808080;
+          box-shadow: inset -1px -1px 0 0 #b4b4b4, inset 1px 1px 0 0 #ffffff;
+        }
+        #searchResult3:hover {
+          border: 1px dotted #110038;
+        }
+      }
+    }
+    .suggestions {
+      .suggestedInput {
+        border: 1px solid #2e32fb;
+        box-shadow: inset -2px -2px 0 0 #e6dce4, inset 2px 2px 0 0 #110038;
+      }
+      .showSugerencias {
+        .contenedorInternoSug {
+          .item3 {
+            background-image: linear-gradient(270deg, #ee3efe 0%, #2e32fb 100%);
+            box-shadow: inset -2px -2px 0 0 #8F8F8F, inset 2px 2px 0 0 #FFFFFF;
+          }
+          .closeBtn {
+            margin-top: -24px;
+          }
+          .gifSug {
+            background: #b4b4b4;
+            box-shadow: inset -2px -2px 0 0 #8F8F8F, inset 2px 2px 0 0 #FFFFFF;
+            
+          }
+        }
+      }
+    }
+
+    .containerSearchResults {
+      .showResults {
+        .inputResults {
+          border: 1px solid #2e32fb;
+          box-shadow: inset -2px -2px 0 0 #e6dce4, inset 2px 2px 0 0 #110038;
+        }
+          .contenedorInternoS:hover .gifSea {
+            background: #b4b4b4;
+            box-shadow: inset -2px -2px 0 0 #8f8f8f, inset 2px 2px 0 0 #ffffff;
+            border: 1px solid #110038;
+            border-style: inset;
+            padding: 2px;
+            object-fit: cover !important;
+            overflow: hidden;
+            cursor: pointer;
+          }
+          .contenedorInternoS:hover .item {
+            background-image: linear-gradient(270deg, #ee3efe 0%, #2e32fb 100%);
+            opacity: 1;
+            z-index: 5;
+            object-fit: cover !important;
+            overflow: hidden;
+            cursor: pointer;
+          }
+        
+      }
+    }
+    .trends {
+      box-sizing: border-box;
+      .trendsInput {
+        border: 1px solid #2e32fb;
+        box-shadow: inset -2px -2px 0 0 #e6dce4, inset 2px 2px 0 0 #110038;
+      }
+      .trendsContainer {
+        .contenedorInternoT:hover .gifTrend {
+          background: #b4b4b4;
+          box-shadow: inset -2px -2px 0 0 #8f8f8f, inset 2px 2px 0 0 #ffffff;
+          border: 1px solid #110038;
+          border-style: inset;
+          padding: 2px;
+          object-fit: cover !important;
+          overflow: hidden;
+          cursor: pointer;
+        }
+        .contenedorInternoT:hover .item2 {
+          background-image: linear-gradient(270deg, #ee3efe 0%, #2e32fb 100%);
+          opacity: 1;
+          z-index: 5;
+          object-fit: cover !important;
+          overflow: hidden;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .container5 {
+      .misGuifosInput {
+        border: 1px solid #2e32fb;
+        box-shadow: inset -2px -2px 0 0 #e6dce4, inset 2px 2px 0 0 #110038;
+      }
+
+    }
+  }
+  .mainContainer1 {
+    background-color: #110038;
+
+    header {
+      .containerInit1 {
+        background-image: linear-gradient(270deg, #ee3efe 0%, #2e32fb 100%);
+        box-shadow: 0 1px 0 0 #110038;
+        color: #ffffff;
+      }
+    }
+    h4 {
+      color: #ffffff;
+    }
+    .containerLogo1 {
+      display: inline-flex;
+      justify-content: flex-start;
+      .atras {
+        background-color:#110038;        
+        margin-top: 30px;
+        margin-left: 35px;
+        position: relative;
+        cursor: pointer;
+      }
+      .logo4 {
+        position: absolute;
+        margin-top: 35px;
+        margin-left: 102px;
+        padding-left: 7px;
+        height: 64px;
+        width: 102.6px;
+        margin-top: 35px;
+        display: block;
+        cursor: pointer;
+      }
+      .logo3 {
+        display: none;
+      }
+    }
+    .create-gifos-panel {
+        background: #b4b4b4;
+        box-shadow: inset -2px -2px 0 0 #8f8f8f, inset 2px 2px 0 0 #ffffff;
+        .create-gifos-p {
+          background-image: linear-gradient(270deg, #ee3efe 0%, #2e32fb 100%);
+          box-shadow: inset -2px -2px 0 0 #8f8f8f, inset 2px 2px 0 0 #ffffff;
+          color: #ffffff;          
+        }
+       
+        .create-gifos-items {
+          color: #110038;
+        }
+      #cancelar {
+        background: #fff4fd;
+        border: 1px solid #110038;
+        box-shadow: inset -1px -1px 0 0 #a72cb3, inset 1px 1px 0 0 #ffffff;
+      }
+      #comenzarButton {
+        background: #ee3efe;
+        border: 1px solid #110038;
+        box-shadow: inset -1px -1px 0 0 #a72cb3, inset 1px 1px 0 0 #ffffff;
+      }
+               
+    }
+    .containerMisGuifos {
+      .misGuifosInput {
+        background: #fffafe;
+        border: 1px solid #2e32fb;
+        box-shadow: inset -2px -2px 0 0 #e6dce4, inset 2px 2px 0 0 #110038;
+        color: #110038;
+      }
+    }
+    .record-gifos-panel-sec {
+      background: #b4b4b4;
+      box-shadow: inset -2px -2px 0 0 #8f8f8f, inset 2px 2px 0 0 #ffffff;
+      .record-gifos-p {
+        background-image: linear-gradient(270deg, #ee3efe 0%, #2e32fb 100%);
+        box-shadow: inset -2px -2px 0 0 #8f8f8f, inset 2px 2px 0 0 #ffffff;   
+      }
+      .video-gifos-panel {
+        background: #ffffff;
+        border: 1px solid #979797;
+        box-shadow: inset -2px -2px 0 0 #e6e6e6, inset 2px 2px 0 0 #000000;
+       
+         
+          .recordingImg:active{
+            background: #ff6161;
+            border: 1px solid #110038;
+            box-shadow: inset -1px -1px 0 0 #993a3a, inset 1px 1px 0 0 #ffffff;
+            color: #ffffff;
+          }
+          .stop {
+            background: #ee3efe;
+            border: 1px solid #110038;
+            box-shadow: inset -1px -1px 0 0 #a72cb3, inset 1px 1px 0 0 #ffffff;
+            .listo{
+              color: #110038;
+            }  
+          }
+          .camara1{
+            background: #ee3efe;
+            border: 1px solid #110038;
+            box-shadow: inset -1px -1px 0 0 #a72cb3, inset 1px 1px 0 0 #ffffff;
+            color: #110038;  
+          }
+          .stop:active{
+            background: #ff6161;
+            border: 1px solid #110038;
+            box-shadow: inset -1px -1px 0 0 #993a3a, inset 1px 1px 0 0 #ffffff;
+          }
+          .camara1:active{
+            background: #ff6161;
+            border: 1px solid #110038;
+            box-shadow: inset -1px -1px 0 0 #993a3a, inset 1px 1px 0 0 #ffffff; 
+          }       
+      }
+    }
+  }
+
+  .capturarButton  {
+    background: #ee3efe;
+    border: 1px solid #110038;
+    color: #ffffff;
+    box-shadow: inset -1px -1px 0 0 #a72cb3, inset 1px 1px 0 0 #ffffff;
+  }
+  .cameraImg{
+    background: #ee3efe!important;
+    border: 1px solid #110038!important;
+    box-shadow: inset -1px -1px 0 0 #a72cb3, inset 1px 1px 0 0 #ffffff!important;
+    color: #fff4fd;
+  }
+
+  #listoButton :active{
+    background: #ff6161;
+    border: 1px solid #110038;
+    box-shadow: inset -1px -1px 0 0 #993a3a, inset 1px 1px 0 0 #ffffff;
+    color: #ffffff;
+  }
+
+  .repetirCapturaButton {
+    background: #110038;
+    border: 1px solid #b4b4b4;
+    box-shadow: inset -1px -1px 0 0 #5c5c5c, inset 1px 1px 0 0 #fff4fd;
+    color: #fff4fd;
+  }
+  .repetirCapturaButton:hover {
+    outline: 1px dotted #ffffff;
+    outline-offset: -4px;     
+    color: #fff4fd;
+              
+  }
+  .subirGuifoButton{
+    background: #110038;
+    border: 1px solid #b4b4b4;
+    box-shadow: inset -1px -1px 0 0 #5c5c5c, inset 1px 1px 0 0 #fff4fd;
+    color:#ffffff
+  }
+  .subirGuifoButton:hover {
+    outline: 1px dotted #ffffff;
+    outline-offset: -4px;      
+    color:#ffffff;             
+  }
+
+}

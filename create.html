@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/index.css" />
+    <link rel="icon" href="./assets/icono.ico" />
+    <title>Guifos.com</title>
+  </head>
+  <body class="day" id="theme">
+    <div class="mainContainer1">
+      <header>
+        <div class="containerInit1">
+          <h4 id="CounterVisitor">
+            ¡Bienvenidos/as a Guifos.com! ——————Donde los gifs están.//////
+            <script>
+              localStorage.getItem("numerovisitas", +localStorage.veces + "");
+              document.write("Número de visitas: " + localStorage.veces + "");
+            </script>
+          </h4>
+        </div>
+      </header>
+      <div class="subcontainer">
+        <section class="menu" id="menu">
+          <div class="dropdownContent">
+            <div class="themeButtonDay hidden" id="day" onclick="day()"></div>
+            <div
+              class="themeButtonNight hidden"
+              id="night"
+              onclick="night()"
+            ></div>
+          </div>
+          <div class="containerLogo1">
+            <a class="atras" href="index.html"
+              ><img class="atras" src="./assets/arrow.svg" alt="arrow" />
+            </a>
+            <img
+              class="logo3"
+              src="./assets/gifOF_logo.png"
+              alt="logo"
+              onclick="window.location.reload()"
+            />
+            <img
+              class="logo4"
+              src="./assets/gifOF_logo_dark.png"
+              alt="logo"
+              onclick="window.location.reload()"
+            />
+          </div>
+        </section>
+        <section class="create-gifos-panel" id="crearGuifosWindow">
+          <p class="create-gifos-p">Crear Guifos</p>
+          <div class="create-gifos-alert">
+            <div class="window-img">
+              <img src="./assets/windowimg.png" alt="window" />
+            </div>
+          </div>
+          <p class="create-gifos-title">Aquí podrás crear tus propios guifos</p>
+          <div class="create-gifos-items">
+            <p>
+              Crear tu <span class="create-gifos-items-bold">guifo</span> es muy
+              fácil, graba cualquier imagen con tu cámara y obtén guifos
+              personalizados. Los pasos para crear tu guifo son:
+            </p>
+            <br />
+            <p>
+              <span class="black">1)</span> Dar permisos de acceso a la cámara
+              (sólo por el tiempo de uso)
+            </p>
+            <p><span class="black">2) </span>Capturar tu momento guifo</p>
+            <p><span class="black">3)</span> Revisar el momento</p>
+            <p><span class="black">4)</span> Listo para subir y compartir!</p>
+            <br />
+            <p>
+              <span class="black"></span>¿Quieres comenzar a crear tu
+              <span class="create-gifos-items-bold">guifo </span>ahora
+            </p>
+          </div>
+          <div class="crearGuifosButtonContainer">
+            <a href="index.html" class="capture-gif-button cancel" id="cancelar"
+            ><span class="btncancel">Cancelar</span></a>
+            <button id="comenzarButton" class="confirm">Comenzar</button>
+          </div>
+        </section>
+        <div id="guifoSubidoContainer" class="guifosubidoContainer">
+          <div id="guifoSubidoTitleContainer" class="guifoSubidoTitleContainer">
+            <span id="guifoSubidoText" class="guifoSubidoText"
+              >Guifo Subido Con Éxito</span
+            >
+            <img
+              id="closeGuifoSubido"
+              class="closeGuifoSubido"
+              src="./assets/close.svg"
+              alt="close"
+            />
+          </div>
+          <div
+            id="guifoSubidoVistaPreviaYOpciones"
+            class="guifoSubidoVistaPreviaYOpciones"
+          >
+            <div id="guifoSubidoVistaPrevia" class="guifoSubidoVistaPrevia"></div>
+            <div id="guifoSubidoOpciones" class="guifoSubidoOpciones">
+              <span id="guifoSubidoTitle" class="guifoSubidoTitle"
+                >Guifo creado con éxito</span
+              >
+              <button id="copiarEnlaceGuifo" class="copiarEnlaceGuifo">
+                Copiar Enlace Guifo
+              </button>
+              <a
+                href=""
+                id="descargarGuifo"
+                class="descargarGuifo"
+                download="myGif.png"
+                >Descargar Guifo</a
+              >
+            </div>
+          </div>
+          <div id="guifoSubidoFooter" class="guifoSubidoFooter">
+            <button id="guifoSubidoListoButton" class="guifoSubidoListoButton">
+              Listo
+            </button>
+          </div>
+        </div>
+
+       <!--MIS GIFOS SECTION-->
+
+       <section class="my-gifos" id="wrapperMisGifosSection">
+        <div class="misGuifosInput" id="misGuifosInput">Mis guifos</div>
+        <div id="crearGifosGifsContainer" class="misGifosGifsContainer"></div>
+       </section>
+
+        <!-- PRECAPTURA CONTAINER -->
+
+        <div id="precapturaContainer" class="precapturaContainer">
+          <div id="precapturaTitleContainer" class="precapturaTitleContainer">
+            <span id="precapturaTitle" class="precapturaTitle"
+              >Un Chequeo Antes de Empezar</span
+            >
+            <a class="close" href="index.html"
+              ><img class="close" id="closePrecaptura" src="./assets/close.svg" alt="close"
+            /></a>
+            
+          </div>
+          <div id="precapturaInnerContainer" class="precapturaInnerContainer">
+            <video id="precaptura" class="precaptura"></video>
+            <img src="video" id="gifRecorded" class="gifRecorded" alt="gif" />
+            <div id="subiendoGifoContainer" class="subiendoGifoContainer">
+              <img src="./assets/globeimg.png" alt="globe" />
+              <span id="subiedoGifosTitle" class="subiendoGifosTitle"
+                >Estamos subiendo tu guifo…</span
+              >
+              <div class="progress-bar" id="progress-bar">
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <span id="tiempoSubiendoGifos" class="tiempoSubiendoGifos"
+                >Tiempo restante:
+                <span class="subiendoGuifosText">38 años</span> algunos
+                minutos</span
+              >
+            </div>
+          </div>
+          <div id="footer" class="footer">
+            <div id="cronometro" class="cronometro">
+              <span class="horas">00</span>
+              <span>:</span>
+              <span>00</span>
+              <span>:</span>
+              <span id="segundos">00</span>
+              <span>:</span>
+              <span id="centesimas" class="centesimas">00</span>
+            </div>
+            <div id="buttonContainer" class="buttonContainer">
+              <div class="contCam"><img
+                id="cameraImg"
+                class="cameraImg"
+                src="./assets/camera.svg"
+                alt="camera"
+              /></div>
+              <img
+                id="recordingImg"
+                class="recordingImg"
+                src="./assets/recording.svg"
+                alt="recording"
+              />
+              <button id="capturarButton" class="capturarButton">Capturar</button>
+              <button id="listoButton" class="listoButton">Listo</button>
+              <button id="repetirCapturaButton" class="repetirCapturaButton">
+                Repetir Captura
+              </button>
+              <button id="subirGuifoButton" class="subirGuifoButton">
+                Subir Guifo
+              </button>
+              <button id="cancelarSubidaButton" class="cancelarSubidaButton">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/changetheme.js"></script>    
+    <script src="./js/crearGuifos.js"></script>
+    <script src="./js/funcionesCamara.js"></script>
+    <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.8/RecordRTC.js"></script>
+  </body>
+</html>
