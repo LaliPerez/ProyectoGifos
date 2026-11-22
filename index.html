@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#fff4fd" />
     <link rel="stylesheet" href="./styles/index.css" />
+    <link rel="stylesheet" href="./styles/search-fixes.css" />
     <link rel="icon" href="./assets/icono.ico" />
     <title>Guifos.com · Buscador de GIFs</title>
   </head>
@@ -19,14 +20,11 @@
           <img class="logo" src="./assets/gifOF_logo.png" alt="Guifos.com" />
           <img class="logo1" src="./assets/gifOF_logo_dark.png" alt="" />
         </a>
-
         <div class="botones">
           <a class="btn-nav1" href="create.html">Crear Guifos</a>
           <div class="dropdown" id="dropdown">
             <button class="btn-nav2" id="themeMenuButton" type="button" aria-expanded="false">Elegir tema</button>
-            <button class="elegirTemaDropdown" id="themeMenuArrow" type="button" aria-label="Abrir opciones de tema">
-              <img class="flecha" src="./assets/dropdown.svg" alt="" />
-            </button>
+            <button class="elegirTemaDropdown" id="themeMenuArrow" type="button" aria-label="Abrir opciones de tema"><img class="flecha" src="./assets/dropdown.svg" alt="" /></button>
             <div class="dropdownContent" id="themeDropdownContent">
               <button class="themeButtonDay" id="day" type="button">Sailor Day</button>
               <button class="themeButtonNight" id="night" type="button">Sailor Night</button>
@@ -41,14 +39,14 @@
           <div class="panel-heading"><h1>Buscar</h1></div>
           <form class="panelBody" id="panelB" role="search">
             <label class="sr-only" for="searchInput">Buscar GIFs</label>
-            <input id="searchInput" class="searchInput" type="search" name="searchInput" placeholder="Busca gifs, hashtags, temas…" autocomplete="off" aria-autocomplete="list" aria-controls="dropdownSearchContent" />
+            <input id="searchInput" class="searchInput" type="search" name="searchInput" placeholder="Busca gifs, hashtags, temas…" autocomplete="off" aria-autocomplete="list" aria-controls="dropdownSearchContent" aria-expanded="false" />
             <button type="submit" class="searchBtn" id="searchBtn"><img class="lupa" src="./assets/lupa.svg" alt="" />Buscar</button>
           </form>
         </div>
         <div id="dropdownSearchContent" class="dropdownSearchContent" role="listbox" aria-label="Sugerencias">
-          <button type="button" id="searchResult1" class="auto" role="option"></button>
-          <button type="button" id="searchResult2" class="auto" role="option"></button>
-          <button type="button" id="searchResult3" class="auto" role="option"></button>
+          <button type="button" id="searchResult1" class="auto" role="option" hidden></button>
+          <button type="button" id="searchResult2" class="auto" role="option" hidden></button>
+          <button type="button" id="searchResult3" class="auto" role="option" hidden></button>
         </div>
       </section>
 
@@ -57,7 +55,7 @@
         <div id="showSugerencias" class="showSugerencias"></div>
       </section>
 
-      <section class="containerSearchResults">
+      <section class="containerSearchResults" aria-live="polite">
         <div class="showResults" id="showResults" hidden>
           <h2 id="inputResults" class="inputResults">Resultados de búsqueda:</h2>
           <div class="resultsContainer" id="resultsContainer"></div>

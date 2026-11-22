@@ -1,0 +1,105 @@
+/* Search page fixes. Loaded after the legacy compiled stylesheet. */
+.subcontainer {
+  width: min(1200px, calc(100% - 32px)) !important;
+  margin: 0 auto !important;
+}
+.container1,
+.container2,
+.containerSearchResults,
+.suggestions,
+.trends {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+.container2 .panel,
+.container2 .dropdownSearchContent,
+.container2 .panelBody,
+.containerSearchResults .showResults,
+.containerSearchResults .inputResults,
+.resultsContainer,
+.trendsContainer {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+.container2 .panelBody {
+  display: flex;
+  gap: 12px;
+  padding: 10px 14px;
+}
+.container2 .panelBody .searchInput {
+  width: auto !important;
+  min-width: 0;
+  flex: 1;
+  margin: 0 !important;
+  padding: 10px 12px !important;
+}
+.container2 .panelBody .searchBtn {
+  flex: 0 0 112px;
+  margin: 0 !important;
+  justify-content: center;
+  gap: 8px;
+}
+#dropdownSearchContent {
+  height: auto !important;
+  padding: 8px 14px;
+}
+#dropdownSearchContent .auto {
+  width: 100% !important;
+  margin: 4px 0 !important;
+  text-align: left !important;
+}
+#dropdownSearchContent .auto[hidden] { display: none !important; }
+.resultsContainer,
+.trendsContainer,
+.showSugerencias {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 16px;
+}
+.resultsContainer .contenedorInternoS,
+.trendsContainer .contenedorInternoT,
+.showSugerencias .contenedorInternoSug {
+  min-width: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+  height: auto !important;
+  overflow: hidden;
+}
+.resultsContainer .gifSea,
+.trendsContainer .gifTrend,
+.showSugerencias .gifSug {
+  display: block;
+  width: 100% !important;
+  height: 240px !important;
+  object-fit: cover;
+}
+.resultsContainer .item,
+.trendsContainer .item2 {
+  position: static !important;
+  display: block;
+  width: 100%;
+  height: auto !important;
+  padding: 6px 8px !important;
+  color: inherit !important;
+  opacity: 1 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#showResults[hidden] { display: none !important; }
+.searchStatus {
+  grid-column: 1 / -1;
+  padding: 24px;
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .container1 { height: auto !important; flex-wrap: wrap; }
+  .container2 .panelBody { height: auto !important; flex-wrap: wrap; }
+  .container2 .panelBody .searchBtn { flex-basis: 100%; }
+  .resultsContainer,
+  .trendsContainer,
+  .showSugerencias { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .resultsContainer .gifSea,
+  .trendsContainer .gifTrend,
+  .showSugerencias .gifSug { height: 170px !important; }
+}
