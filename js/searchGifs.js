@@ -1,4 +1,4 @@
-// GIF search and API helpers
+// GIF search and autocomplete powered by the repository's existing GIPHY key.
 (() => {
   const GIPHY_API_KEY = "9pB6HDoUsmugUZYZ3Hi26eSUUS1KDe6M";
   const form = document.getElementById("panelB");
@@ -10,200 +10,191 @@
 
   if (!form || !input || !resultsContainer || !resultsSection || !resultsTitle) return;
 
-  let searchController = null;
-  let autocompleteController = null;
-  let autocompleteTimer = null;
+  let searchController;
+  let autocompleteController;
+  let autocompleteTimer;
+
+  const getSuggestionItems = () => Array.from(document.querySelectorAll("#dropdownSearchContent .auto"));
 
   async function fetchGiphy(url, controller) {
-    const response = await fetch(url, { signal: controller?.signal });
-    if (!response.ok) throw new Error(`Giphy respondió con ${response.status}`);
-
+    const response = await fetch(url, controller ? { signal: controller.signal } : undefined);
+    if (!response.ok) throw new Error(`GIPHY respondió con HTTP ${response.status}`);
     const payload = await response.json();
     if (payload.meta?.status && payload.meta.status >= 400) {
-      throw new Error(payload.meta.msg || "Error al consultar Giphy");
+      throw new Error(payload.meta.msg || "Error al consultar GIPHY");
     }
     return payload.data || [];
   }
 
-  function gifTitle(item) {
-    const title = item.title?.trim();
-    if (title) return title;
-    return item.slug?.replaceAll("-", " ").trim() || "GIF";
+  function getGifTitle(item) {
+    return item.title?.trim() || item.slug?.replace(/-/g, " ") || "GIF";
   }
 
   function createGifCard(item) {
-    const card = document.createElement("div");
+    const imageUrl = item.images?.fixed_height?.url || item.images?.downsized?.url || item.images?.original?.url;
+    if (!imageUrl) return null;
+
+    const card = document.createElement("article");
     card.className = "contenedorInternoS";
 
     const image = document.createElement("img");
     image.className = "gifSea";
-    image.src = item.images?.downsized?.url || item.images?.fixed_height?.url || "";
-    image.alt = gifTitle(item);
+    image.src = imageUrl;
+    image.alt = getGifTitle(item);
     image.loading = "lazy";
-    image.style.width = "100%";
-    image.style.height = "298px";
-    image.style.objectFit = "cover";
+    image.decoding = "async";
 
-    const title = document.createElement("div");
+    const title = document.createElement("p");
     title.className = "item placeholderSearch";
-    title.textContent = gifTitle(item);
-    title.style.textOverflow = "ellipsis";
-    title.style.overflow = "hidden";
-
+    title.textContent = getGifTitle(item);
     card.append(image, title);
     return card;
   }
 
-  function setSearchStatus(message) {
-    resultsContainer.innerHTML = "";
+  function showStatus(message) {
+    resultsContainer.replaceChildren();
     const status = document.createElement("p");
     status.className = "searchStatus";
+    status.setAttribute("role", "status");
     status.textContent = message;
     resultsContainer.appendChild(status);
   }
 
   async function search(query) {
-    const cleanedQuery = query?.trim();
-    if (!cleanedQuery) {
-      resultsSection.style.display = "none";
+    const cleanQuery = String(query || "").trim();
+    if (!cleanQuery) {
+      searchController?.abort();
+      resultsSection.hidden = true;
+      resultsContainer.replaceChildren();
+      input.focus();
       return;
     }
 
-    if (searchController) searchController.abort();
-    searchController = new AbortController();
+    searchController?.abort();
+    const controller = new AbortController();
+    searchController = controller;
 
-    resultsSection.style.display = "block";
-    resultsTitle.textContent = `Resultados de búsqueda: ${cleanedQuery}`;
-    setSearchStatus("Cargando GIFs…");
+    resultsSection.hidden = false;
+    resultsTitle.textContent = `Resultados de búsqueda: ${cleanQuery}`;
+    showStatus("Buscando GIFs…");
 
     const params = new URLSearchParams({
       api_key: GIPHY_API_KEY,
-      q: cleanedQuery,
+      q: cleanQuery,
       limit: "18",
-      rating: "g"
+      rating: "g",
+      lang: "es"
     });
 
     try {
-      const data = await fetchGiphy(
-        `https://api.giphy.com/v1/gifs/search?${params.toString()}`,
-        searchController
-      );
+      const gifs = await fetchGiphy(`https://api.giphy.com/v1/gifs/search?${params}`, controller);
+      if (controller.signal.aborted) return;
 
-      resultsContainer.innerHTML = "";
-      if (!data.length) {
-        setSearchStatus("No encontramos GIFs para esa búsqueda.");
+      const cards = gifs.map(createGifCard).filter(Boolean);
+      if (!cards.length) {
+        showStatus("No encontramos GIFs para esa búsqueda. Probá con otras palabras.");
         return;
       }
 
       const fragment = document.createDocumentFragment();
-      data.forEach((item) => fragment.appendChild(createGifCard(item)));
-      resultsContainer.appendChild(fragment);
+      cards.forEach((card) => fragment.appendChild(card));
+      resultsContainer.replaceChildren(fragment);
     } catch (error) {
-      if (error.name !== "AbortError") {
-        setSearchStatus("No se pudieron cargar los resultados. Intentá nuevamente.");
+      if (error.name !== "AbortError" && !controller.signal.aborted) {
+        showStatus("No se pudieron cargar los GIFs. Revisá tu conexión e intentá nuevamente.");
         console.error("Error al buscar GIFs:", error);
       }
     }
   }
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (suggestionsMenu) suggestionsMenu.style.display = "none";
-    search(input.value);
-  });
-
   function closeAutocomplete() {
     if (suggestionsMenu) suggestionsMenu.style.display = "none";
+    input.setAttribute("aria-expanded", "false");
   }
 
   function openAutocomplete() {
     if (suggestionsMenu) suggestionsMenu.style.display = "block";
+    input.setAttribute("aria-expanded", "true");
   }
 
   async function autocomplete(query) {
-    const cleanedQuery = query.trim();
-    const items = Array.from(document.queryElementsByClassName("auto"));
-
-    if (!cleanedQuery) {
+    const cleanQuery = String(query || "").trim();
+    const items = getSuggestionItems();
+    if (!cleanQuery) {
+      autocompleteController?.abort();
+      items.forEach((item) => { item.textContent = ""; item.hidden = true; });
       closeAutocomplete();
-      items.forEach((item) => {
-        item.textContent = "";
-        item.removeAttribute("href");
-      });
       return;
     }
 
-    if (autocompleteController) autocompleteController.abort();
-    autocompleteController = new AbortController();
-
-    const params = new URLSearchParams({
-      api_key: GIPHY_API_KEY,
-      q: cleanedQuery,
-      limit: "6"
-    });
+    autocompleteController?.abort();
+    const controller = new AbortController();
+    autocompleteController = controller;
+    const params = new URLSearchParams({ api_key: GIPHY_API_KEY, q: cleanQuery, limit: String(items.length), lang: "es" });
 
     try {
-      const data = await fetchGiphy(
-        `https://api.giphy.com/v1/gifs/search/tags?${params.toString()}`,
-        autocompleteController
-      );
+      const tags = await fetchGiphy(`https://api.giphy.com/v1/gifs/search/tags?${params}`, controller);
+      if (controller.signal.aborted) return;
 
+      let visibleCount = 0;
       items.forEach((item, index) => {
-        const suggestion = data[index]?.name;
-        item.textContent = suggestion || "";
-        if (suggestion) {
-          item.setAttribute("role", "option");
-          item.setAttribute("tabindex", "0");
-        } else {
-          item.removeAttribute("role");
-          item.removeAttribute("tabindex");
-        }
+        const label = tags[index]?.name?.trim() || "";
+        item.textContent = label;
+        item.hidden = !label;
+        if (label) visibleCount += 1;
       });
-
-      openAutocomplete();
+      if (visibleCount) openAutocomplete();
+      else closeAutocomplete();
     } catch (error) {
       if (error.name !== "AbortError") closeAutocomplete();
     }
   }
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    closeAutocomplete();
+    search(input.value);
+  });
 
   input.addEventListener("input", () => {
     window.clearTimeout(autocompleteTimer);
     autocompleteTimer = window.setTimeout(() => autocomplete(input.value), 250);
   });
 
-  input.addEventListener("focus", () => {
-    if (input.value.trim()) openAutocomplete();
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeAutocomplete();
+    if (event.key === "ArrowDown") {
+      const first = getSuggestionItems().find((item) => !item.hidden);
+      if (first) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
   });
 
-  document.querySelectorAll(".auto").forEach((item) => {
-    const selectSuggestion = () => {
-      if (!item.textContent.trim()) return;
-      input.value = item.textContent.trim();
+  getSuggestionItems().forEach((item) => {
+    item.addEventListener("click", () => {
+      const term = item.textContent.trim();
+      if (!term) return;
+      input.value = term;
       closeAutocomplete();
-      search(input.value);
-    };
-
-    item.addEventListener("click", (event) => {
-      event.preventDefault();
-      selectSuggestion();
+      search(term);
     });
     item.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        selectSuggestion();
+        item.click();
+      }
+      if (event.key === "Escape") {
+        closeAutocomplete();
+        input.focus();
       }
     });
   });
 
   document.addEventListener("click", (event) => {
-    if (!form.contains(event.target) && !suggestionsMenu?.contains(event.target)) {
-      closeAutocomplete();
-    }
+    if (!form.contains(event.target) && !suggestionsMenu?.contains(event.target)) closeAutocomplete();
   });
 
   window.search = search;
-  window.toggleDropdownSearchContent = closeAutocomplete;
-  window.displayHidden = () => {
-    resultsSection.style.display = "block";
-  };
 })();
