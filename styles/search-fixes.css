@@ -1,82 +1,105 @@
-/* Search page fixes. Loaded after the legacy compiled stylesheet. */
-.subcontainer {
+/* Search page fixes. This file is loaded after the legacy compiled stylesheet. */
+html body .subcontainer {
   width: min(1200px, calc(100% - 32px)) !important;
+  max-width: 1200px !important;
   margin: 0 auto !important;
 }
-.container1,
-.container2,
-.containerSearchResults,
-.suggestions,
-.trends {
+html body .container1,
+html body .container2,
+html body .containerSearchResults,
+html body .suggestions,
+html body .trends {
   width: 100% !important;
   max-width: 100% !important;
 }
-.container2 .panel,
-.container2 .dropdownSearchContent,
-.container2 .panelBody,
-.containerSearchResults .showResults,
-.containerSearchResults .inputResults,
-.resultsContainer,
-.trendsContainer {
+html body .container2 .panel,
+html body .container2 .dropdownSearchContent,
+html body .container2 .panelBody,
+html body .containerSearchResults .showResults,
+html body .containerSearchResults .inputResults,
+html body #resultsContainer,
+html body .trendsContainer {
   width: 100% !important;
   max-width: 100% !important;
 }
-.container2 .panelBody {
-  display: flex;
+html body .container2 .panelBody {
+  display: flex !important;
+  align-items: center;
   gap: 12px;
+  height: auto !important;
   padding: 10px 14px;
 }
-.container2 .panelBody .searchInput {
+html body .container2 .panelBody .searchInput {
   width: auto !important;
   min-width: 0;
-  flex: 1;
+  flex: 1 1 auto;
   margin: 0 !important;
   padding: 10px 12px !important;
 }
-.container2 .panelBody .searchBtn {
+html body .container2 .panelBody .searchBtn {
+  display: inline-flex !important;
   flex: 0 0 112px;
-  margin: 0 !important;
+  align-items: center;
   justify-content: center;
   gap: 8px;
+  margin: 0 !important;
 }
-#dropdownSearchContent {
+html body #dropdownSearchContent {
+  display: none;
   height: auto !important;
   padding: 8px 14px;
 }
-#dropdownSearchContent .auto {
+html body #dropdownSearchContent .auto {
+  display: block;
   width: 100% !important;
   margin: 4px 0 !important;
   text-align: left !important;
 }
-#dropdownSearchContent .auto[hidden] { display: none !important; }
-.resultsContainer,
-.trendsContainer,
-.showSugerencias {
+html body #dropdownSearchContent .auto[hidden] { display: none !important; }
+html body #showResults:not([hidden]) {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+html body #showResults[hidden] { display: none !important; }
+html body #resultsContainer,
+html body #trendsContainer,
+html body #showSugerencias {
   display: grid !important;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
   gap: 16px;
+  height: auto !important;
+  overflow: visible !important;
 }
-.resultsContainer .contenedorInternoS,
-.trendsContainer .contenedorInternoT,
-.showSugerencias .contenedorInternoSug {
+html body #resultsContainer .contenedorInternoS,
+html body #trendsContainer .contenedorInternoT,
+html body #showSugerencias .contenedorInternoSug {
+  display: block !important;
+  position: relative !important;
   min-width: 0 !important;
   max-width: none !important;
   width: 100% !important;
   height: auto !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   overflow: hidden;
 }
-.resultsContainer .gifSea,
-.trendsContainer .gifTrend,
-.showSugerencias .gifSug {
-  display: block;
+html body #resultsContainer .gifSea,
+html body #trendsContainer .gifTrend,
+html body #showSugerencias .gifSug {
+  display: block !important;
+  position: static !important;
   width: 100% !important;
   height: 240px !important;
   object-fit: cover;
+  opacity: 1 !important;
 }
-.resultsContainer .item,
-.trendsContainer .item2 {
+html body #resultsContainer .item,
+html body #trendsContainer .item2 {
   position: static !important;
-  display: block;
+  display: block !important;
   width: 100%;
   height: auto !important;
   padding: 6px 8px !important;
@@ -86,20 +109,22 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#showResults[hidden] { display: none !important; }
-.searchStatus {
+html body .searchStatus {
+  display: block !important;
   grid-column: 1 / -1;
+  width: 100%;
   padding: 24px;
   text-align: center;
+  color: #110038;
 }
 @media (max-width: 600px) {
-  .container1 { height: auto !important; flex-wrap: wrap; }
-  .container2 .panelBody { height: auto !important; flex-wrap: wrap; }
-  .container2 .panelBody .searchBtn { flex-basis: 100%; }
-  .resultsContainer,
-  .trendsContainer,
-  .showSugerencias { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .resultsContainer .gifSea,
-  .trendsContainer .gifTrend,
-  .showSugerencias .gifSug { height: 170px !important; }
+  html body .container1 { height: auto !important; flex-wrap: wrap; }
+  html body .container2 .panelBody { height: auto !important; flex-wrap: wrap; }
+  html body .container2 .panelBody .searchBtn { flex-basis: 100%; }
+  html body #resultsContainer,
+  html body #trendsContainer,
+  html body #showSugerencias { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  html body #resultsContainer .gifSea,
+  html body #trendsContainer .gifTrend,
+  html body #showSugerencias .gifSug { height: 170px !important; }
 }
