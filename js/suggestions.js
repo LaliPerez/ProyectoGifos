@@ -1,60 +1,53 @@
-/* SUGGESTED GIFOS WITH FIXED LIST*/ 
-let funny = ['lol', 'simpsons', 'dog', 'smile', 'modernfamily', 'netflix','cute','koala', 'animals','zootopia','joke', 'show', 'fun'];
-let show = funny[Math.floor(Math.random(4) * funny.length)];
-const suggested = document.getElementById('suggestedInput')
+// Suggested GIFs
+(() => {
+  const API_KEY = "9pB6HDoUsmugUZYZ3Hi26eSUUS1KDe6M";
+  const container = document.getElementById("showSugerencias");
+  if (!container) return;
 
-const s = show;
-const apikey = '9pB6HDoUsmugUZYZ3Hi26eSUUS1KDe6M'
+  const terms = ["lol", "simpsons", "dog", "smile", "modern family", "netflix", "cute", "koala", "animals", "joke"];
+  const term = terms[Math.floor(Math.random() * terms.length)];
 
-async function getTrendingGifs(s) {
+  async function loadSuggestions() {
+    container.setAttribute("aria-busy", "true");
     try {
-        let url = (`https://api.giphy.com/v1/gifs/search?api_key=${apikey}&q=${s}&limit=4`);
-        const data = await fetch(url).then(res => res.json()).then(data => data.data);        
-                const contenedorSug = document.getElementById('showSugerencias');
-                console.log(data)
-                data.forEach(item => {
-                const contenedorInternoSug = document.createElement('div');            
-                contenedorInternoSug.classList.add('contenedorInternoSug');
+      const params = new URLSearchParams({ api_key: API_KEY, q: term, limit: "4", rating: "g" });
+      const response = await fetch(`https://api.giphy.com/v1/gifs/search?${params}`);
+      if (!response.ok) throw new Error(`Giphy respondió con ${response.status}`);
+      const payload = await response.json();
+      container.innerHTML = "";
 
-                const headerSug = document.createElement('div');   
-                const closebtn = document.createElement('img');  
-                headerSug.classList.add('item3');
-                closebtn.src = './assets/button3.svg';
-                closebtn.classList.add('closebtn');
-                
-                let titleArrSug = item.title.split(("")[1]).map(word => `# ${word} `)
-                titleArrSug.forEach(title => headerSug.innerText+=`${title}`);
-                
-                const imageSug = document.createElement('img');
-                imageSug.classList.add('gifSug');
-                imageSug.setAttribute('src', item.images.original.url);
-                imageSug.setAttribute('style', 'width: 100%')
-                console.log(imageSug);
-            
-                const buttonSee = document.createElement("div")
-                buttonSee.classList.add('btnSeeMore');
-                buttonSee.innerHTML=" &nbsp Ver más... &nbsp ";
-                buttonSee.setAttribute('type','button');
-                
-                contenedorInternoSug.appendChild(headerSug);
-                contenedorInternoSug.appendChild(closebtn);
-                contenedorInternoSug.appendChild(imageSug);
-                contenedorInternoSug.appendChild(buttonSee);
-                contenedorSug.appendChild(contenedorInternoSug);
-            })              
-            
-        }
-         catch (error) {
-            console.log('failed', error);
+      (payload.data || []).forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "contenedorInternoSug";
+
+        const title = document.createElement("h3");
+        title.className = "item3";
+        title.textContent = item.title ? `#${item.title}` : `#${term}`;
+
+        const image = document.createElement("img");
+        image.className = "gifSug";
+        image.src = item.images?.fixed_height?.url || item.images?.original?.url;
+        image.alt = item.title || `GIF de ${term}`;
+        image.loading = "lazy";
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "btnSeeMore";
+        button.textContent = "Ver más";
+        button.addEventListener("click", () => {
+          if (typeof window.search === "function") window.search(term);
+        });
+
+        card.append(title, image, button);
+        container.appendChild(card);
+      });
+    } catch (error) {
+      container.textContent = "No se pudieron cargar las sugerencias.";
+      console.error("Error al cargar sugerencias:", error);
+    } finally {
+      container.removeAttribute("aria-busy");
     }
-}
-getTrendingGifs(s);
+  }
 
-//see More 
-let btn = document.getElementById('showSugerencias');
-btn.addEventListener('click', function() {
-    window.open('https://giphy.com/','_blank');
-});
-
-
-
+  loadSuggestions();
+})();

@@ -1,44 +1,34 @@
+// Theme management shared by all pages.
+(() => {
+  const body = document.getElementById("theme");
+  const dayButton = document.getElementById("day");
+  const nightButton = document.getElementById("night");
+  const menuButton = document.getElementById("themeMenuButton");
+  const menuArrow = document.getElementById("themeMenuArrow");
+  const menu = document.getElementById("themeDropdownContent");
 
-document.getElementById("day").addEventListener("click", day);
-document.getElementById("night").addEventListener("click", night);
+  if (!body) return;
 
+  function setTheme(theme) {
+    body.className = theme;
+    localStorage.setItem("theme", theme);
+    document.documentElement.style.colorScheme = theme === "night" ? "dark" : "light";
+  }
 
-function day(){
-    theme.className='day';
-    localStorage.setItem('theme','day');
-}
-function night(){
-    theme.className='night';
-    localStorage.setItem('theme','night');
-}
-let selectedTheme = localStorage.getItem("theme");
-    switch(selectedTheme){
-    case 'day':{day()}
-    break;
-    case 'night':{night()}
-    break;
-    }
+  function toggleMenu(force) {
+    if (!menu) return;
+    const open = typeof force === "boolean" ? force : menu.style.display !== "block";
+    menu.style.display = open ? "block" : "none";
+    menuButton?.setAttribute("aria-expanded", String(open));
+  }
 
-/*
-document.getElementById("day").addEventListener("click", setLight);
-document.getElementById("night").addEventListener("click", setDark);
-
-function setLight(){
-    document.getElementById("mainContainer").className ='light';
-    localStorage.setItem('theme','light');
-}
-function setDark(){
-    document.getElementById("mainContainer").className ='dark';
-    localStorage.setItem ('theme','dark');
-}
-let selectedTheme = localStorage.getItem("theme")
-switch(selectedTheme){
-    case 'light':{setLight()}
-    break;
-    case 'dark':{setDark()}
-    break;
-}
-
-
-*/
-   
+  const savedTheme = localStorage.getItem("theme");
+  setTheme(savedTheme === "night" ? "night" : "day");
+  dayButton?.addEventListener("click", () => setTheme("day"));
+  nightButton?.addEventListener("click", () => setTheme("night"));
+  menuButton?.addEventListener("click", () => toggleMenu());
+  menuArrow?.addEventListener("click", () => toggleMenu());
+  document.addEventListener("click", (event) => {
+    if (menu && !event.target.closest("#dropdown") && menu.style.display === "block") toggleMenu(false);
+  });
+})();

@@ -1,0 +1,80 @@
+// Improve core layout and accessibility while preserving the Sailor themes.
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+button, a, input { font: inherit; }
+button { cursor: pointer; }
+img { max-width: 100%; }
+
+.searchStatus {
+  grid-column: 1 / -1;
+  min-height: 80px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.auto {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .container1,
+  .subcontainer,
+  .mainContainer,
+  .mainContainer1 {
+    width: 100% !important;
+  }
+
+  .container1 {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .botones {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .containerInit,
+  .containerInit1 {
+    font-size: 12px;
+  }
+
+  .container1 {
+    align-items: flex-start;
+  }
+
+  .botones {
+    width: 100%;
+  }
+
+  .btn-nav1,
+  .btn-nav2,
+  .elegirTemaDropdown,
+  .misGuifos {
+    box-sizing: border-box;
+  }
+
+  .panelBody {
+    grid-template-columns: 1fr;
+  }
+
+  .searchBtn {
+    width: 100%;
+  }
+}

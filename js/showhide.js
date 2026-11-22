@@ -1,5 +1,5 @@
-// Keeps the search dropdown behavior independent from the search implementation.
+// Search container visibility helper.
 function showContainer() {
   const results = document.getElementById("showResults");
-  if (results) results.style.display = "block";
+  if (results) results.hidden = false;
 }
